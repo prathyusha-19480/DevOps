@@ -6,7 +6,7 @@ resource "aws_instance" "ec2_pro" {
     availability_zone = "${var.availability_zones}"
     ami ="${var.ami}"
     instance_type = "${var.instance_type}"
-    key_name= "Terraformkey"
+    key_name= "controllerserver"
     security_groups= ["${aws_security_group.ALLTRAFFIC.name}"]
     
 }
@@ -30,7 +30,7 @@ egress {
  }
 
  resource "aws_ebs_volume" "volume1" {
-    availability_zone = "us-west-2a"
+    availability_zone = "us-east-1a"
     size = 1
     encrypted = true
   
