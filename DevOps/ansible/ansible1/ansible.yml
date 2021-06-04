@@ -1,0 +1,28 @@
+---
+  - name: Installing tomcat
+    hosts: 52.72.229.17
+    gather_facts: false
+
+    vars:
+      req_java: java-1.8.0-openjdk
+      set_java: jre-1.8.0-openjdk
+      tomcat_ver: 9.0.41
+      tomcat_archive_url: https://mirror.novg.net/apache/tomcat/tomcat-{{tomcat_ver.split('.')[0]}}/v{{tomcat_ver}}/bin/apache-tomcat-{{tomcat_ver}}.tar.gz
+      tomcat_archive_dest:  /tmp/apache-tomcat-{{ tomcat_ver }}.tar.gz
+      tomcat_port: 8080
+      ui_manager_user: tomcat
+      ui_manager_pass: qwerty123
+      ui_admin_username: tomcat
+      ui_admin_pass: qwerty123
+    become: yes
+    become_method: sudo
+    tasks:
+      - name: updating repos
+        yum:
+          name: "*"
+          state: latest
+
+      - name: Creating a directory myapp
+        file:
+          path: /usr/myapp
+          state: directory
